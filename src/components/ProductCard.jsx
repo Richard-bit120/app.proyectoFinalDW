@@ -1,22 +1,38 @@
 // src/components/ProductCard.jsx
-import { Link as RouterLink } from 'react-router-dom';
-import { Card, CardMedia, CardContent, Typography, Button, Box } from '@mui/material';
+import { Link as RouterLink } from "react-router-dom";
+import {
+  Card,
+  CardMedia,
+  CardContent,
+  Typography,
+  Button,
+  Box,
+} from "@mui/material";
 
 export const ProductCard = ({ product }) => {
   // Limpieza rápida de la URL de la imagen (la API a veces devuelve strings con corchetes)
-  const imageUrl = product.images[0]?.replace(/[\[\]"]/g, '') || 'https://via.placeholder.com/640';
+  const imageUrl = product.images[0];
 
   return (
-    <Card sx={{ height: '100%', display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
+    <Card
+      sx={{
+        height: "100%",
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "space-between",
+        backgroundColor: "#065596",
+        color: "#ffffff",
+      }}
+    >
       {/* Requisito: Imagen */}
       <CardMedia
         component="img"
-        height="200"
+        height="500"
         image={imageUrl}
         alt={product.title}
-        sx={{ objectFit: 'cover' }}
+        sx={{ objectFit: "cover" }}
       />
-      
+
       {/* Requisito: Nombre y Precio */}
       <CardContent sx={{ flexGrow: 1 }}>
         <Typography gutterBottom variant="h6" component="h2" noWrap>

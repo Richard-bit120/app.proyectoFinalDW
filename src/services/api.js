@@ -1,6 +1,6 @@
 // src/services/api.js
 
-const BASE_URL = 'https://api.platzi.com/api/v1';
+const BASE_URL = 'https://api.escuelajs.co/api/v1';
 
 export const apiService = {
   // Obtener todos los productos o filtrados

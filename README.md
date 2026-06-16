@@ -1,4 +1,3 @@
-
 -----------------------------------
 
 # 🛒 FakeStore E-Commerce - Proyecto Integrador
@@ -11,15 +10,15 @@
 
 El proyecto fue desarrollado utilizando el siguiente ecosistema técnico obligatorio:
 
-| Tecnología / Librería | Versión / Tipo | Propósito |
-| :--- | :--- | :--- |
-| **React** | v18+ | Biblioteca principal para la interfaz de usuario |
-| **Vite** | Última | Herramienta de construcción y servidor de desarrollo rápido |
-| **React Router DOM** | v6 | Sistema de enrutamiento dinámico y navegación |
-| **Material UI (MUI)** | v5 / v6 | Framework de diseño y componentes listos para producción |
-| **Context API** | Nativo de React | Gestión del estado global (Carrito y Autenticación) |
-| **Fetch API** | Nativa (ES6+) | Consumo de servicios asincrónicos sin dependencias externas |
-| **JavaScript** | ES6+ | Lógica de programación moderna (Async/Await, Destructuring) |
+| Tecnología / Librería | Versión / Tipo  | Propósito                                                   |
+| :-------------------- | :-------------- | :---------------------------------------------------------- |
+| **React**             | v18+            | Biblioteca principal para la interfaz de usuario            |
+| **Vite**              | Última          | Herramienta de construcción y servidor de desarrollo rápido |
+| **React Router DOM**  | v6              | Sistema de enrutamiento dinámico y navegación               |
+| **Material UI (MUI)** | v5 / v6         | Framework de diseño y componentes listos para producción    |
+| **Context API**       | Nativo de React | Gestión del estado global (Carrito y Autenticación)         |
+| **Fetch API**         | Nativa (ES6+)   | Consumo de servicios asincrónicos sin dependencias externas |
+| **JavaScript**        | ES6+            | Lógica de programación moderna (Async/Await, Destructuring) |
 
 ---
 
@@ -109,3 +108,6 @@ Hacé un par de pruebas locas: intentá entrar a /perfil sin estar logueado para
 Escribí cualquier cosa en la URL (como /productos/inventado) para que vea cómo tu enrutador lo manda directo a la página 404 - NotFound.
 
 Agregá un par de productos al carrito y mostrale cómo se actualiza el contador de la Navbar al instante gracias al estado global compartido.
+
+---------------------------------------------------
+```

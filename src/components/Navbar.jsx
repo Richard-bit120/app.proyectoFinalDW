@@ -1,15 +1,23 @@
 // src/components/Navbar.jsx
-import { useContext } from 'react';
-import { Link as RouterLink, useNavigate } from 'react-router-dom';
-import { AppBar, Toolbar, Typography, Button, Box, Badge, IconButton } from '@mui/material';
-import ShoppingCartIcon from '@mui/icons-material/ShoppingCart'; // Necesitas instalar @mui/icons-material
-import AccountCircleIcon from '@mui/icons-material/AccountCircle';
-import { UseCategories } from '../hooks/useCategories';
-import { CartContext } from '../contexts/CartContext';
-import { UserContext } from '../contexts/UserContext';
+import { useContext } from "react";
+import { Link as RouterLink, useNavigate } from "react-router-dom";
+import {
+  AppBar,
+  Toolbar,
+  Typography,
+  Button,
+  Box,
+  Badge,
+  IconButton,
+} from "@mui/material";
+import ShoppingCartIcon from "@mui/icons-material/ShoppingCart"; // Necesitas instalar @mui/icons-material
+import AccountCircleIcon from "@mui/icons-material/AccountCircle";
+import { useCategories } from "../hooks/useCategories";
+import { CartContext } from "../contexts/CartContext";
+import { UserContext } from "../contexts/UserContext";
 
 export const Navbar = () => {
-  const { categories } = UseCategories();
+  const { categories } = useCategories();
   const { cart } = useContext(CartContext);
   const { usuario, logout } = useContext(UserContext);
   const navigate = useNavigate();
@@ -25,13 +33,18 @@ export const Navbar = () => {
           variant="h6"
           component={RouterLink}
           to="/"
-          sx={{ textDecoration: 'none', color: 'inherit', fontWeight: 'bold', flexGrow: 1 }}
+          sx={{
+            textDecoration: "none",
+            color: "inherit",
+            fontWeight: "bold",
+            flexGrow: 1,
+          }}
         >
           FakeStore 🛒
         </Typography>
 
         {/* Navbar con categorías de la API */}
-        <Box sx={{ display: { xs: 'none', md: 'flex' }, gap: 1, mr: 2 }}>
+        <Box sx={{ display: { xs: "none", md: "flex" }, gap: 1, mr: 2 }}>
           <Button component={RouterLink} to="/productos" color="inherit">
             Todos
           </Button>
@@ -41,7 +54,7 @@ export const Navbar = () => {
               component={RouterLink}
               to={`/productos?categoria=${cat.id}`}
               color="inherit"
-              sx={{ textTransform: 'capitalize' }}
+              sx={{ textTransform: "capitalize" }}
             >
               {cat.name}
             </Button>
@@ -52,7 +65,7 @@ export const Navbar = () => {
         </Box>
 
         {/* Sección de Carrito y Usuario */}
-        <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
+        <Box sx={{ display: "flex", alignItems: "center", gap: 2 }}>
           {/* Botón Carrito con Badge de cantidad */}
           <IconButton component={RouterLink} to="/carrito" color="inherit">
             <Badge badgeContent={cantidadCarrito} color="secondary">
@@ -62,19 +75,32 @@ export const Navbar = () => {
 
           {/* Estado de Usuario (Bienvenida / Login) */}
           {usuario ? (
-            <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
-              <Typography variant="body2" sx={{ display: { xs: 'none', sm: 'block' } }}>
+            <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
+              <Typography
+                variant="body2"
+                sx={{ display: { xs: "none", sm: "block" } }}
+              >
                 ¡Hola, {usuario.name}!
               </Typography>
               <IconButton component={RouterLink} to="/perfil" color="inherit">
                 <AccountCircleIcon />
               </IconButton>
-              <Button color="error" variant="contained" size="small" onClick={logout}>
+              <Button
+                color="error"
+                variant="contained"
+                size="small"
+                onClick={logout}
+              >
                 Salir
               </Button>
             </Box>
           ) : (
-            <Button component={RouterLink} to="/login" color="inherit" variant="outlined">
+            <Button
+              component={RouterLink}
+              to="/login"
+              color="inherit"
+              variant="outlined"
+            >
               Ingresar
             </Button>
           )}

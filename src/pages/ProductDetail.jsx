@@ -1,11 +1,20 @@
 // src/pages/ProductDetail.jsx
-import { useState, useEffect, useContext } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
-import { Container, Grid, Typography, Button, Box, CircularProgress, Alert, Paper } from '@mui/material';
-import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
-import ArrowBackIcon from '@mui/icons-material/ArrowBack';
-import { apiService } from '../services/api';
-import { CartContext } from '../contexts/CartContext';
+import { useState, useEffect, useContext } from "react";
+import { useParams, useNavigate } from "react-router-dom";
+import {
+  Container,
+  Grid,
+  Typography,
+  Button,
+  Box,
+  CircularProgress,
+  Alert,
+  Paper,
+} from "@mui/material";
+import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
+import ArrowBackIcon from "@mui/icons-material/ArrowBack";
+import { apiService } from "../services/api";
+import { CartContext } from "../contexts/CartContext";
 
 export const ProductDetail = () => {
   // 1. Capturamos el ID que viene en la ruta (/producto/12)
@@ -29,7 +38,7 @@ export const ProductDetail = () => {
         const data = await apiService.getProductById(id);
         setProduct(data);
       } catch (err) {
-        setError(err.message || 'No se pudo cargar el detalle del producto.');
+        setError(err.message || "No se pudo cargar el detalle del producto.");
       } finally {
         setLoading(false);
       }
@@ -51,7 +60,14 @@ export const ProductDetail = () => {
   // Control obligatorio de Loading
   if (loading) {
     return (
-      <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', minHeight: '50vh' }}>
+      <Box
+        sx={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          minHeight: "50vh",
+        }}
+      >
         <CircularProgress size={60} />
       </Box>
     );
@@ -61,11 +77,18 @@ export const ProductDetail = () => {
   if (error) {
     return (
       <Container maxWidth="md" sx={{ mt: 4 }}>
-        <Alert severity="error" action={
-          <Button color="inherit" size="small" onClick={() => navigate('/productos')}>
-            Volver al catálogo
-          </Button>
-        }>
+        <Alert
+          severity="error"
+          action={
+            <Button
+              color="inherit"
+              size="small"
+              onClick={() => navigate("/productos")}
+            >
+              Volver al catálogo
+            </Button>
+          }
+        >
           {error}
         </Alert>
       </Container>
@@ -73,14 +96,16 @@ export const ProductDetail = () => {
   }
 
   // Limpieza rápida de corchetes en las imágenes que devuelve a veces la Fake API de Platzi
-  const imageUrl = product?.images[0]?.replace(/[\[\]"]/g, '') || 'https://via.placeholder.com/640';
+  const imageUrl =
+    product?.images[0]?.replace(/[\[\]"]/g, "") ||
+    "https://via.placeholder.com/640";
 
   return (
     <Container maxWidth="lg">
       {/* Botón para regresar al catálogo rápidamente */}
-      <Button 
-        startIcon={<ArrowBackIcon />} 
-        onClick={() => navigate(-1)} 
+      <Button
+        startIcon={<ArrowBackIcon />}
+        onClick={() => navigate(-1)}
         sx={{ mb: 3 }}
       >
         Volver atrás
@@ -95,30 +120,61 @@ export const ProductDetail = () => {
               src={imageUrl}
               alt={product?.title}
               sx={{
-                width: '100%',
-                maxHeight: 450,
-                objectFit: 'cover',
+                width: "100%",
+                height: 600,
+                objectFit: "cover",
                 borderRadius: 2,
-                boxShadow: 1
+                boxShadow: 1,
               }}
             />
           </Grid>
 
           {/* Requisito obligatorio: Título, Descripción, Precio, Categoría */}
-          <Grid item xs={12} md={6} sx={{ display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
-            <Typography variant="overline" color="text.secondary" fontWeight="bold">
+          <Grid
+            item
+            xs={12}
+            md={6}
+            sx={{
+              display: "flex",
+              flexDirection: "column",
+              justifyContent: "center",
+              backgroundColor: "#065596",
+              color: "#ffffff",
+            }}
+          >
+            <Typography
+              variant="overline"
+              color="text.secondary"
+              fontWeight="bold"
+            >
               Categoría: {product?.category?.name}
             </Typography>
-            
-            <Typography variant="h3" component="h1" fontWeight="bold" gutterBottom sx={{ mt: 1 }}>
+
+            <Typography
+              variant="h3"
+              component="h1"
+              fontWeight="bold"
+              gutterBottom
+              sx={{ mt: 1 }}
+            >
               {product?.title}
             </Typography>
 
-            <Typography variant="h4" color="primary.main" fontWeight="bold" sx={{ my: 2 }}>
+            <Typography
+              variant="h4"
+              color="primary.main"
+              fontWeight="bold"
+              sx={{ my: 2 }}
+            >
               ${product?.price}
             </Typography>
 
-            <Typography variant="body1" color="text.secondary" paragraph sx={{ lineHeight: 1.7, mb: 4 }}>
+            <Typography
+              variant="body1"
+              color="text.secondary"
+              paragraph
+              sx={{ lineHeight: 1.7, mb: 4 }}
+            >
               {product?.description}
             </Typography>
 
@@ -130,7 +186,7 @@ export const ProductDetail = () => {
                 size="large"
                 startIcon={<AddShoppingCartIcon />}
                 onClick={handleAgregar}
-                sx={{ fontWeight: 'bold', px: 4, py: 1.5 }}
+                sx={{ fontWeight: "bold", px: 4, py: 1.5 }}
               >
                 Agregar al carrito
               </Button>

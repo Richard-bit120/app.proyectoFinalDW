@@ -100,6 +100,10 @@ export const ProductDetail = () => {
     product?.images[0]?.replace(/[\[\]"]/g, "") ||
     "https://via.placeholder.com/640";
 
+  //  const imageUrl =
+  //    product?.images[0]?.replace(/[\[\]"]/g, "") ||
+  //    "https://via.placeholder.com/640";
+
   return (
     <Container maxWidth="lg">
       {/* Botón para regresar al catálogo rápidamente */}

@@ -11,7 +11,9 @@ import {
 
 export const ProductCard = ({ product }) => {
   // Limpieza rápida de la URL de la imagen (la API a veces devuelve strings con corchetes)
-  const imageUrl = product.images[0];
+  const imageUrl =
+    product?.images[0]?.replace(/[\[\]"]/g, "") ||
+    "https://via.placeholder.com/640";
 
   return (
     <Card

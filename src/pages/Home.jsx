@@ -30,7 +30,7 @@ export const Home = () => {
   }, [products]);
 
   return (
-    <Container maxWidth="lg"z>
+    <Container maxWidth="lg" z>
       {/* Sección Destacada / Hero Banner */}
       <Box
         sx={{
@@ -71,7 +71,7 @@ export const Home = () => {
         fontWeight="bold"
         sx={{ mb: 3 }}
       >
-        Productos Destacados Aleatorios
+        Productos Destacados
       </Typography>
 
       {/* Control obligatorio de Loading de la API */}

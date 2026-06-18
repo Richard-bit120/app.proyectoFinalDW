@@ -1,110 +1,75 @@
 // src/components/Navbar.jsx
 import { useContext } from "react";
-import { Link as RouterLink, useNavigate } from "react-router-dom";
+import { Link as RouterLink } from "react-router-dom";
 import {
   AppBar,
   Toolbar,
   Typography,
-  Button,
   Box,
   Badge,
   IconButton,
+  Link,
 } from "@mui/material";
-import ShoppingCartIcon from "@mui/icons-material/ShoppingCart"; // Necesitas instalar @mui/icons-material
-import AccountCircleIcon from "@mui/icons-material/AccountCircle";
-import { useCategories } from "../hooks/useCategories";
+import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
+import StorefrontIcon from "@mui/icons-material/Storefront"; // Icono de la tienda a la izquierda
 import { CartContext } from "../contexts/CartContext";
-import { UserContext } from "../contexts/UserContext";
 
 export const Navbar = () => {
-  const { categories } = useCategories();
   const { cart } = useContext(CartContext);
-  const { usuario, logout } = useContext(UserContext);
-  const navigate = useNavigate();
 
-  // Calcular la cantidad total de productos en el carrito
-  const cantidadCarrito = cart.reduce((acc, item) => acc + item.quantity, 0);
+  // Calcular la cantidad total de productos para la burbuja
+  const cantidadCarrito = cart?.reduce((acc, item) => acc + item.quantity, 0) || 0;
 
   return (
-    <AppBar position="sticky" color="primary">
-      <Toolbar>
-        {/* Logo y Nombre del E-commerce */}
-        <Typography
-          variant="h6"
-          component={RouterLink}
-          to="/"
-          sx={{
-            textDecoration: "none",
-            color: "inherit",
-            fontWeight: "bold",
-            flexGrow: 1,
-          }}
-        >
-          FakeStore 🛒
-        </Typography>
-
-        {/* Navbar con categorías de la API */}
-        <Box sx={{ display: { xs: "none", md: "flex" }, gap: 1, mr: 2 }}>
-          <Button component={RouterLink} to="/productos" color="inherit">
-            Todos
-          </Button>
-          {categories.map((cat) => (
-            <Button
-              key={cat.id}
-              component={RouterLink}
-              to={`/productos?categoria=${cat.id}`}
-              color="inherit"
-              sx={{ textTransform: "capitalize" }}
-            >
-              {cat.name}
-            </Button>
-          ))}
-          <Button component={RouterLink} to="/contacto" color="inherit">
-            Contacto
-          </Button>
+    <AppBar position="sticky" sx={{ bgcolor: "#1976d2", boxShadow: "none" }}>
+      <Toolbar sx={{ justifyContent: "space-between" }}>
+        
+        {/* Bloque Izquierdo: Icono de tienda + Nombre */}
+        <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
+          <StorefrontIcon sx={{ color: "#ffffff" }} />
+          <Typography
+            variant="h6"
+            component={RouterLink}
+            to="/"
+            sx={{
+              textDecoration: "none",
+              color: "#ffffff",
+              fontSize: "1.1rem",
+            }}
+          >
+            Fake Store
+          </Typography>
         </Box>
 
-        {/* Sección de Carrito y Usuario */}
-        <Box sx={{ display: "flex", alignItems: "center", gap: 2 }}>
-          {/* Botón Carrito con Badge de cantidad */}
-          <IconButton component={RouterLink} to="/carrito" color="inherit">
-            <Badge badgeContent={cantidadCarrito} color="secondary">
-              <ShoppingCartIcon />
+        {/* Bloque Derecho: Enlaces fijos y Carrito */}
+        <Box sx={{ display: "flex", alignItems: "center", gap: 3 }}>
+          
+          {/* Enlaces de Texto exactamente como tu captura */}
+          <Link component={RouterLink} to="/" color="inherit" underline="none" sx={{ fontSize: "0.85rem", opacity: 0.85, "&:hover": { opacity: 1 } }}>
+            HOME
+          </Link>
+          <Link component={RouterLink} to="/productos" color="inherit" underline="none" sx={{ fontSize: "0.85rem", opacity: 0.85, "&:hover": { opacity: 1 } }}>
+            PRODUCTOS
+          </Link>
+          <Link component={RouterLink} to="/contacto" color="inherit" underline="none" sx={{ fontSize: "0.85rem", opacity: 0.85, "&:hover": { opacity: 1 } }}>
+            CONTACTO
+          </Link>
+          <Link component={RouterLink} to="/login" color="inherit" underline="none" sx={{ fontSize: "0.85rem", fontWeight: "bold" }}>
+            LOGIN
+          </Link>
+          <Link component={RouterLink} to="/registro" color="inherit" underline="none" sx={{ fontSize: "0.85rem", opacity: 0.85, "&:hover": { opacity: 1 } }}>
+            REGISTRO
+          </Link>
+
+          {/* Icono de Carrito Blanco */}
+          <IconButton component={RouterLink} to="/carrito" sx={{ color: "#ffffff", p: 0.5 }}>
+            <Badge badgeContent={cantidadCarrito} color="error">
+              <ShoppingCartIcon sx={{ fontSize: "1.4rem" }} />
             </Badge>
           </IconButton>
 
-          {/* Estado de Usuario (Bienvenida / Login) */}
-          {usuario ? (
-            <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
-              <Typography
-                variant="body2"
-                sx={{ display: { xs: "none", sm: "block" } }}
-              >
-                ¡Hola, {usuario.name}!
-              </Typography>
-              <IconButton component={RouterLink} to="/perfil" color="inherit">
-                <AccountCircleIcon />
-              </IconButton>
-              <Button
-                color="error"
-                variant="contained"
-                size="small"
-                onClick={logout}
-              >
-                Salir
-              </Button>
-            </Box>
-          ) : (
-            <Button
-              component={RouterLink}
-              to="/login"
-              color="inherit"
-              variant="outlined"
-            >
-              Ingresar
-            </Button>
-          )}
         </Box>
+
       </Toolbar>
     </AppBar>
   );

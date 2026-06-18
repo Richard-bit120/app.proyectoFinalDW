@@ -30,7 +30,7 @@ export const Home = () => {
   }, [products]);
 
   return (
-    <Container maxWidth="lg">
+    <Container maxWidth="lg"z>
       {/* Sección Destacada / Hero Banner */}
       <Box
         sx={{
